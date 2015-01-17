@@ -34,6 +34,7 @@ pub use seed::Seed;
 pub use math::{Point2, Point3, Point4};
 pub use perlin::{perlin2, perlin3, perlin4};
 pub use open_simplex::{open_simplex2, open_simplex3};
+pub use simplex::{simplex2, simplex3, simplex4};
 pub use brownian::{Brownian2, Brownian3, Brownian4};
 
 pub use cell::{range_sqr_euclidian2, range_sqr_euclidian3, range_sqr_euclidian4};
@@ -52,6 +53,7 @@ mod seed;
 mod brownian;
 mod perlin;
 mod open_simplex;
+mod simplex;
 mod cell;
 
 /// A trait alias for a 2-dimensional noise function.

@@ -46,6 +46,24 @@ pub type Vector3<T> = [T; 3];
 /// A 4-dimensional vector, for internal use.
 pub type Vector4<T> = [T; 4];
 
+pub fn step<T: Float>(a: T, b: T) -> T {
+    if b < a {
+        Float::zero()
+    } else {
+        Float::one()
+    }
+}
+
+pub fn clamp<T: Float>(val: T, min: T, max: T) -> T {
+    if val < min {
+        min
+    } else if val > max {
+        max
+    } else {
+        val
+    }
+}
+
 pub fn map2<T: Copy, U, F: Fn(T) -> U>(a: Vector2<T>, f: F) -> Vector2<U> {
     let (ax, ay) = (a[0], a[1]);
     [f(ax), f(ay)]
@@ -103,6 +121,13 @@ pub fn mul4<T: Copy + Mul<T, Output = T> + Copy>(a: Vector4<T>, b: T) -> Vector4
 pub fn dot2<T: Float>(a: Vector2<T>, b: Vector2<T>) -> T { fold2(zip_with2(a, b, Mul::mul), Add::add) }
 pub fn dot3<T: Float>(a: Vector3<T>, b: Vector3<T>) -> T { fold3(zip_with3(a, b, Mul::mul), Add::add) }
 pub fn dot4<T: Float>(a: Vector4<T>, b: Vector4<T>) -> T { fold4(zip_with4(a, b, Mul::mul), Add::add) }
+
+pub fn step2<T: Float>(a: Point2<T>, b: Point2<T>) -> Point2<T> { zip_with2(a, b, step) }
+pub fn step3<T: Float>(a: Point3<T>, b: Point3<T>) -> Point3<T> { zip_with3(a, b, step) }
+
+pub fn clamp4<T: Float>(x: Point4<T>, min: T, max: T) -> Point4<T> {
+    [clamp(x[0], min, max), clamp(x[1], min, max), clamp(x[2], min, max), clamp(x[3], min, max)]
+}
 
 pub fn const2<T: Copy>(x: T) -> Vector2<T> { [x, x] }
 pub fn const3<T: Copy>(x: T) -> Vector3<T> { [x, x, x] }

@@ -20,6 +20,9 @@ name = "perlin"
 name = "open_simplex"
 
 [[example]]
+name = "simplex"
+
+[[example]]
 name = "brownian"
 
 [[example]]
